@@ -1,5 +1,6 @@
-ompiled class file
+compiled class file
 *.class
+.settings
 
 # Log file
 *.log
@@ -23,3 +24,5 @@ hs_err_pid*
 
 # ignore target folder
 /target/
+.*
+!.gitignore
