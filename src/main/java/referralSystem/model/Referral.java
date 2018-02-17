@@ -40,6 +40,10 @@ public class Referral implements Serializable {
 	@Column(nullable = false)
 	private String whereToUse;
 
+	//Count of favorites
+	@Column(name = "likes")
+	private int numberOfLikes;
+
 	public Referral() {
 
 	}
@@ -107,4 +111,13 @@ public class Referral implements Serializable {
 	public void setWhereToUse(String whereToUse) {
 		this.whereToUse = whereToUse;
 	}
+
+	public int getNumberOfLikes() {
+		return numberOfLikes;
+	}
+
+	public void setNumberOfLikes(int numberOfLikes) {
+		this.numberOfLikes = numberOfLikes;
+	}
+
 }

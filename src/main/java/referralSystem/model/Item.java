@@ -24,17 +24,17 @@ public class Item implements Serializable {
 	@Column(nullable = false)
 	private String name;
 
-	@Column(name = "item_description")
+	@Column(name = "description")
 	private String itemDescription;
 
 	@ManyToOne
-	@JoinColumn(name = "item_category_id", nullable = false)
+	@JoinColumn(name = "category_id", nullable = false)
 	private ItemCategory itemCategory;
 
-	@Column(name = "item_image")
+	@Column(name = "image_path")
 	private String itemImagePath;
 
-	@Column(name = "item_status")
+	@Column(name = "status", nullable=false)
 	private String status;
 
 	public Item() {

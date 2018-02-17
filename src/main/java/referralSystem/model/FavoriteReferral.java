@@ -9,40 +9,40 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-@IdClass(ViewReferralPK.class)
+@IdClass(FavoriteReferralPK.class)
 @Entity
-@Table(name = "view_referrals")
-public class ViewReferral implements Serializable {
+@Table(name = "favorite_referrals")
+public class FavoriteReferral implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private User viewedUserId;
+	private User favoriteUser;
 
 	@Id
-	private Referral viewedReferralId;
+	private Referral favoriteReferral;
 
 	@Column(name = "view_date", nullable = false)
 	private Date viewedDate;
 
-	public ViewReferral() {
+	public FavoriteReferral() {
 
 	}
 
-	public User getViewedUserId() {
-		return viewedUserId;
+	public User getFavoriteUser() {
+		return favoriteUser;
 	}
 
-	public void setViewedUserId(User viewedUserId) {
-		this.viewedUserId = viewedUserId;
+	public void setFavoriteUser(User favoriteUser) {
+		this.favoriteUser = favoriteUser;
 	}
 
-	public Referral getViewedReferralId() {
-		return viewedReferralId;
+	public Referral getFavoriteReferral() {
+		return favoriteReferral;
 	}
 
-	public void setViewedReferralId(Referral viewedReferralId) {
-		this.viewedReferralId = viewedReferralId;
+	public void setFavoriteReferral(Referral favoriteReferral) {
+		this.favoriteReferral = favoriteReferral;
 	}
 
 	public Date getViewedDate() {
