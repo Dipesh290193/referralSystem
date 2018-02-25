@@ -1,6 +1,7 @@
 package referralSystem.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +38,9 @@ public class Item implements Serializable {
 
 	@Column(name = "status", nullable=false)
 	private String status;
+	
+	@OneToMany(mappedBy="item")
+	private Set<Referral> referrals;
 
 	public Item() {
 

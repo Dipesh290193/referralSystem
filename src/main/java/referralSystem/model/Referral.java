@@ -7,26 +7,31 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-@IdClass(ReferralPK.class)
 @Entity
-@Table(name = "referrals")
+@Table(name = "referrals",uniqueConstraints= {@UniqueConstraint(columnNames= {"referrer_id","item_id"})})
 public class Referral implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "referral_id", unique = true, nullable = false)
 	@GeneratedValue
+	@Id
 	private long referralId;
 
-	@Id
+	@ManyToOne
+	@JoinColumn(name = "referrer_id")
 	private User referrer;
 
-	@Id
+	@ManyToOne
+	@JoinColumn(name = "item_id")
 	private Item item;
 
+	@Column(name="referral_description")
 	private String referralDescription;
 
 	@Column(nullable = false)

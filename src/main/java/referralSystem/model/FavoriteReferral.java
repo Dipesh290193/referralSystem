@@ -5,21 +5,30 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-@IdClass(FavoriteReferralPK.class)
 @Entity
-@Table(name = "favorite_referrals")
+@Table(name = "favorite_referrals",uniqueConstraints= {@UniqueConstraint(columnNames= {"user_id","referral_id"})})
 public class FavoriteReferral implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
+	@Column(name = "favorite_referrals_id")
+	private long favoriteReferralsId;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User favoriteUser;
 
-	@Id
+	@ManyToOne
+	@JoinColumn(name = "referral_id")
 	private Referral favoriteReferral;
 
 	@Column(name = "view_date", nullable = false)

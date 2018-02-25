@@ -51,9 +51,10 @@ ALTER TABLE categories OWNER TO dipesh;
 --
 
 CREATE TABLE favorite_referrals (
+    favorite_referrals_id bigint NOT NULL,
     view_date date NOT NULL,
-    user_id bigint NOT NULL,
-    referral_id bigint NOT NULL
+    referral_id bigint,
+    user_id bigint
 );
 
 
@@ -94,15 +95,15 @@ ALTER TABLE items OWNER TO dipesh;
 --
 
 CREATE TABLE referrals (
+    referral_id bigint NOT NULL,
     code_or_link character varying(255) NOT NULL,
     created date,
     likes integer,
     referral_description character varying(255),
-    referral_id bigint NOT NULL,
     view_count bigint,
     where_to_use character varying(255) NOT NULL,
-    referrer_id bigint NOT NULL,
-    item_id bigint NOT NULL
+    item_id bigint,
+    referrer_id bigint
 );
 
 
@@ -136,7 +137,7 @@ COPY categories (category_id, name) FROM stdin;
 -- Data for Name: favorite_referrals; Type: TABLE DATA; Schema: public; Owner: dipesh
 --
 
-COPY favorite_referrals (view_date, user_id, referral_id) FROM stdin;
+COPY favorite_referrals (favorite_referrals_id, view_date, referral_id, user_id) FROM stdin;
 \.
 
 
@@ -152,7 +153,7 @@ COPY items (item_id, description, image_path, name, status, category_id) FROM st
 -- Data for Name: referrals; Type: TABLE DATA; Schema: public; Owner: dipesh
 --
 
-COPY referrals (code_or_link, created, likes, referral_description, referral_id, view_count, where_to_use, referrer_id, item_id) FROM stdin;
+COPY referrals (referral_id, code_or_link, created, likes, referral_description, view_count, where_to_use, item_id, referrer_id) FROM stdin;
 \.
 
 
@@ -184,7 +185,7 @@ ALTER TABLE ONLY categories
 --
 
 ALTER TABLE ONLY favorite_referrals
-    ADD CONSTRAINT favorite_referrals_pkey PRIMARY KEY (referral_id, user_id);
+    ADD CONSTRAINT favorite_referrals_pkey PRIMARY KEY (favorite_referrals_id);
 
 
 --
@@ -200,7 +201,15 @@ ALTER TABLE ONLY items
 --
 
 ALTER TABLE ONLY referrals
-    ADD CONSTRAINT referrals_pkey PRIMARY KEY (item_id, referrer_id);
+    ADD CONSTRAINT referrals_pkey PRIMARY KEY (referral_id);
+
+
+--
+-- Name: favorite_referrals uk757jg48onba9wdy7p4jek6n11; Type: CONSTRAINT; Schema: public; Owner: dipesh
+--
+
+ALTER TABLE ONLY favorite_referrals
+    ADD CONSTRAINT uk757jg48onba9wdy7p4jek6n11 UNIQUE (user_id, referral_id);
 
 
 --
@@ -212,11 +221,11 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: referrals uk_qhnoyqw880kewdi02w9fgt31h; Type: CONSTRAINT; Schema: public; Owner: dipesh
+-- Name: referrals ukijub42ed9msivv7x2fngjvo6; Type: CONSTRAINT; Schema: public; Owner: dipesh
 --
 
 ALTER TABLE ONLY referrals
-    ADD CONSTRAINT uk_qhnoyqw880kewdi02w9fgt31h UNIQUE (referral_id);
+    ADD CONSTRAINT ukijub42ed9msivv7x2fngjvo6 UNIQUE (referrer_id, item_id);
 
 
 --
